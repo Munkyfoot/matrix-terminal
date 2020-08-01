@@ -18,10 +18,11 @@ class Matrix {
 
     // Methods
     string GenerateRow() const; // Defined in matrix.cpp
-    void Display(string row);   // Defined in matrix.cpp
+    void AddNoise(float noise); // Defined in matrix.cpp
 
   private:
     vector<string> rows_{};
+    int current_row_id_{0};
     int screen_width_{};
     int screen_height_{};
 };

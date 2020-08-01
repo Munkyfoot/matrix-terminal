@@ -13,36 +13,30 @@ Matrix::Matrix(int width, int height) {
     this->screen_height_ = height;
 
     for (int i = 0; i < height; i++) {
-        this->rows_.push_back("");
+        this->rows_.push_back(this->GenerateRow());
     }
 }
 
 string Matrix::GenerateRow() const {
     string row{};
     for (int i = 0; i < this->screen_width_; i++) {
-        if (this->rows_[0][std::min((ulong)i, this->rows_[0].size() - 1)] == ' ') {
-            if (rand() % 100 < 90) {
-                row += " ";
-            } else {
-                row += (char)(rand() % 76 + 48);
-            }
-        } else {
-            if (rand() % 100 < 25) {
-                row += " ";
-            } else {
-                row += (char)(rand() % 76 + 48);
-            }
-        }
+        row += (char)(rand() % 76 + 48);
     }
     return row;
 }
 
-void Matrix::Display(string row) {
-    for (int i = this->rows_.size() - 1; i >= 0; i--) {
-        if (i == 0) {
-            this->rows_[i] = row;
-        } else {
-            this->rows_[i] = this->rows_[i - 1];
+void Matrix::AddNoise(float noise) {
+    if (noise < 0) {
+        noise = 0;
+    } else if (noise > 1) {
+        noise = 1;
+    }
+
+    for (int r = 0; r < this->rows_.size(); r++) {
+        int changes = rand() % (int)(this->rows_[r].length() * noise);
+        for (int c = 0; c < changes; c++) {
+            this->rows_[r][rand() % (int)(this->rows_[r].length())] =
+                (char)(rand() % 76 + 48);
         }
     }
 }
