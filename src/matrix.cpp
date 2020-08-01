@@ -1,24 +1,39 @@
 #include "matrix.h"
+#include <random>
 #include <string>
 #include <vector>
-#include <random>
 
+using std::rand;
 using std::string;
 using std::vector;
-using std::rand;
 
-void Matrix::GenerateRow() {
+Matrix::Matrix(int width, int height) {
+    this->screen_width_ = width;
+    this->screen_height_ = height;
+
+    for (int i = 0; i < height; i++) {
+        this->rows_.push_back("");
+    }
+}
+
+string Matrix::GenerateRow() const {
     string row{};
     for (int i = 0; i < this->screen_width_; i++) {
-        if(rand() % 10 < 8){
+        if (rand() % 10 < 8) {
             row += " ";
-        }
-        else{
-        row += (char)(rand() % 127);
+        } else {
+            row += std::to_string(rand() % 10);
         }
     }
-    rows_.push_back(row);
-    if (rows_.size() > this->screen_height_) {
-        rows_.erase(rows_.begin());
+    return row;
+}
+
+void Matrix::Display(string row) {
+    for (int i = 0; i < this->rows_.size(); i++) {
+        if (i == this->rows_.size() - 1) {
+            this->rows_[i] = row;
+        } else {
+            this->rows_[i] = this->rows_[i + 1];
+        }
     }
 }

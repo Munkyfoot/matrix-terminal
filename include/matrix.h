@@ -9,8 +9,7 @@ using std::vector;
 
 class Matrix {
   public:
-    Matrix(int width, int height)
-        : screen_width_(width), screen_height_(height) {}
+    Matrix(int width, int height); // Defined in matrix.cpp
 
     // Accessors
     vector<string> Rows() const { return rows_; }
@@ -18,7 +17,8 @@ class Matrix {
     int Height() const { return screen_height_; }
 
     // Methods
-    void GenerateRow(); //Defined in matrix.cpp
+    string GenerateRow() const; // Defined in matrix.cpp
+    void Display(string row);   // Defined in matrix.cpp
 
   private:
     vector<string> rows_{};

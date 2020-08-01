@@ -16,7 +16,7 @@ int main() {
     Matrix matrix(getmaxx(stdscr) - 1, getmaxy(stdscr) - 1);
 
     while (1) {
-        matrix.GenerateRow();
+        matrix.Display(matrix.GenerateRow());
 
         init_pair(1, COLOR_GREEN, -1);
         attron(COLOR_PAIR(1));
@@ -24,10 +24,10 @@ int main() {
             if (i == matrix.Rows().size() - 1) {
                 attroff(COLOR_PAIR(1));
             }
-            mvprintw(i, 0,  matrix.Rows()[i].c_str());
+            mvprintw(i, 0, matrix.Rows()[i].c_str());
         }
         refresh();
-        std::this_thread::sleep_for(std::chrono::milliseconds(150));
+        std::this_thread::sleep_for(std::chrono::milliseconds(80));
     }
     endwin();
 
