@@ -22,7 +22,7 @@ string Matrix::GenerateRow() const {
         if (rand() % 10 < 8) {
             row += " ";
         } else {
-            row += std::to_string(rand() % 10);
+            row += (char)(rand() % 76 + 48);
         }
     }
     return row;
