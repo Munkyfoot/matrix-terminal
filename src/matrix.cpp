@@ -29,11 +29,11 @@ string Matrix::GenerateRow() const {
 }
 
 void Matrix::Display(string row) {
-    for (int i = 0; i < this->rows_.size(); i++) {
-        if (i == this->rows_.size() - 1) {
+    for (int i = this->rows_.size() - 1; i >= 0; i--) {
+        if (i == 0) {
             this->rows_[i] = row;
         } else {
-            this->rows_[i] = this->rows_[i + 1];
+            this->rows_[i] = this->rows_[i - 1];
         }
     }
 }
