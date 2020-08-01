@@ -15,6 +15,11 @@ Matrix::Matrix(int width, int height) {
     for (int i = 0; i < height; i++) {
         this->rows_.push_back(this->GenerateRow());
     }
+
+    for (int i = 0; i < width; i++) {
+        this->lengths_.push_back(rand() % (height / 4) + height / 4);
+        this->starts_.push_back(rand() % height);
+    }
 }
 
 string Matrix::GenerateRow() const {
@@ -38,5 +43,11 @@ void Matrix::AddNoise(float noise) {
             this->rows_[r][rand() % (int)(this->rows_[r].length())] =
                 (char)(rand() % 76 + 48);
         }
+    }
+}
+
+void Matrix::Tick() {
+    for (int i = 0; i < screen_width_; i++) {
+        this->starts_[i] = (this->starts_[i] + 1) % screen_height_;
     }
 }
