@@ -1,9 +1,13 @@
 #include "matrix.h"
 #include <chrono>
+#include <cstring>
 #include <curses.h>
 #include <string>
 #include <thread>
 #include <time.h>
+#include <vector>
+
+using std::string;
 
 int main() {
     initscr();
@@ -20,12 +24,25 @@ int main() {
 
         init_pair(1, COLOR_GREEN, -1);
         attron(COLOR_PAIR(1));
-        for (int i = 0; i < matrix.Rows().size(); i++) {
-            if (i == matrix.Rows().size() - 1) {
-                attroff(COLOR_PAIR(1));
+        for (int y = 0; y < matrix.Rows().size(); y++) {
+            string this_row = matrix.Rows()[y];
+            for (int x = 0; x < this_row.size(); x++) {
+                bool end = y == matrix.Rows().size() - 1;
+                if (!end) {
+                    end = matrix.Rows()[y + 1][x] == ' ';
+                }
+
+                if (end) {
+                    attroff(COLOR_PAIR(1));
+                }
+                char c[]{matrix.Rows()[y][x]};
+                mvprintw(y, x, c);
+                if (end) {
+                    attron(COLOR_PAIR(1));
+                }
             }
-            mvprintw(i, 0, matrix.Rows()[i].c_str());
         }
+        attroff(COLOR_PAIR(1));
         refresh();
         std::this_thread::sleep_for(std::chrono::milliseconds(80));
     }
