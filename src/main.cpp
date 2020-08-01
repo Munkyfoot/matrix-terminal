@@ -8,6 +8,15 @@
 
 using std::string;
 
+struct Drop{
+    public:
+        int x{};
+        int y{};
+        char c{};
+
+        Drop(int _x, int _y, int _c) : x(_x), y(_y), c(_c) {} 
+};
+
 int main() {
     initscr();
     noecho();
@@ -23,6 +32,7 @@ int main() {
         matrix.Tick();
         init_pair(1, COLOR_GREEN, -1);
         attron(COLOR_PAIR(1));
+        vector<Drop> drops{};
         for (int y = 0; y < matrix.Rows().size(); y++) {
             string this_row = matrix.Rows()[y];
             for (int x = 0; x < this_row.length(); x++) {
@@ -33,10 +43,18 @@ int main() {
                         this_row[x] = ' ';
                     }
                 }
+                if(y == (matrix.Starts()[x] + matrix.Lengths()[x]) % matrix.Height()){
+                    Drop drop{x, y, this_row[x]};
+                    drops.push_back(drop);
+                }
             }
             mvprintw(y, 0, this_row.c_str());
         }
         attroff(COLOR_PAIR(1));
+        for(int d = 0; d < drops.size(); d++){
+            char c[]{drops[d].c};
+            mvprintw(drops[d].y, drops[d].x, c);
+        }
         refresh();
         std::this_thread::sleep_for(std::chrono::milliseconds(65));
     }
