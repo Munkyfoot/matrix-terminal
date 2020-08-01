@@ -1,4 +1,5 @@
 #include "matrix.h"
+#include <ctime>
 #include <random>
 #include <string>
 #include <vector>
@@ -19,10 +20,18 @@ Matrix::Matrix(int width, int height) {
 string Matrix::GenerateRow() const {
     string row{};
     for (int i = 0; i < this->screen_width_; i++) {
-        if (rand() % 10 < 8) {
-            row += " ";
+        if (this->rows_[0][std::min((ulong)i, this->rows_[0].size() - 1)] == ' ') {
+            if (rand() % 100 < 90) {
+                row += " ";
+            } else {
+                row += (char)(rand() % 76 + 48);
+            }
         } else {
-            row += (char)(rand() % 76 + 48);
+            if (rand() % 100 < 25) {
+                row += " ";
+            } else {
+                row += (char)(rand() % 76 + 48);
+            }
         }
     }
     return row;

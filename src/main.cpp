@@ -44,7 +44,7 @@ int main() {
         }
         attroff(COLOR_PAIR(1));
         refresh();
-        std::this_thread::sleep_for(std::chrono::milliseconds(80));
+        std::this_thread::sleep_for(std::chrono::milliseconds(33));
     }
     endwin();
 
