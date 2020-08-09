@@ -50,12 +50,12 @@ void Matrix::Tick() {
     for (int i = 0; i < screen_width_; i++) {
         this->starts_[i] = (this->starts_[i] + 1) % screen_height_;
         if (this->starts_[i] + this->lengths_[i] == screen_height_) {
-            if (rand() % 2 == 0) {
+            if (rand() % 3 == 0) {
                 if (this->lengths_[i] < screen_height_ / 2) {
                     this->lengths_[i] += 1;
                 }
             } else {
-                if (this->lengths_[i] > screen_height_ / 5) {
+                if (this->lengths_[i] > screen_height_ / 4) {
                     this->lengths_[i] -= 1;
                 }
             }
