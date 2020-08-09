@@ -17,7 +17,7 @@ Matrix::Matrix(int width, int height) {
     }
 
     for (int i = 0; i < width; i++) {
-        this->lengths_.push_back(rand() % (height / 4) + height / 4);
+        this->lengths_.push_back(rand() % (height / 3) + height / 3);
         this->starts_.push_back(rand() % height);
     }
 }
@@ -51,11 +51,11 @@ void Matrix::Tick() {
         this->starts_[i] = (this->starts_[i] + 1) % screen_height_;
         if (this->starts_[i] + this->lengths_[i] == screen_height_) {
             if (rand() % 3 == 0) {
-                if (this->lengths_[i] < screen_height_ / 2) {
+                if (this->lengths_[i] < (2 * screen_height_) / 3) {
                     this->lengths_[i] += 1;
                 }
             } else {
-                if (this->lengths_[i] > screen_height_ / 4) {
+                if (this->lengths_[i] > screen_height_ / 3) {
                     this->lengths_[i] -= 1;
                 }
             }

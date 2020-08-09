@@ -56,7 +56,7 @@ int main() {
             mvprintw(drops[d].y, drops[d].x, c);
         }
         refresh();
-        std::this_thread::sleep_for(std::chrono::milliseconds(65));
+        std::this_thread::sleep_for(std::chrono::milliseconds(84));
     }
     endwin();
 
