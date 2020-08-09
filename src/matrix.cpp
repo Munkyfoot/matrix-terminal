@@ -25,7 +25,11 @@ Matrix::Matrix(int width, int height) {
 string Matrix::GenerateRow() const {
     string row{};
     for (int i = 0; i < this->screen_width_; i++) {
-        row += (char)(rand() % 76 + 48);
+        // ASCII
+        //row += (char)(rand() % 76 + 48);
+
+        // binary
+        row += std::to_string(rand() & 2 / 2);
     }
     return row;
 }
@@ -40,8 +44,13 @@ void Matrix::AddNoise(float noise) {
     for (int r = 0; r < this->rows_.size(); r++) {
         int changes = rand() % (int)(this->rows_[r].length() * noise);
         for (int c = 0; c < changes; c++) {
+            std::string output = std::to_string(rand() & 2 / 2);
             this->rows_[r][rand() % (int)(this->rows_[r].length())] =
-                (char)(rand() % 76 + 48);
+                // ASCII
+                //(char)(rand() % 76 + 48);
+
+                // binary
+                output[0];
         }
     }
 }
