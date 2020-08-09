@@ -25,7 +25,7 @@ int main() {
     use_default_colors();
     start_color();
 
-    Matrix matrix(getmaxx(stdscr) - 1, getmaxy(stdscr) - 1);
+    Matrix matrix(getmaxx(stdscr) - 1, getmaxy(stdscr));
 
     while (1) {
         matrix.AddNoise(0.1);
