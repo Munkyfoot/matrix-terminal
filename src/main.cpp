@@ -24,8 +24,8 @@ int main() {
         init_pair(1, COLOR_GREEN, -1);
         attron(COLOR_PAIR(1));
         vector<Drop> drops{};
-        for (int y = 0; y < matrix.Rows().size(); y++) {
-            string this_row = matrix.Rows()[y];
+        for (int y = 0; y < matrix.Height(); y++) {
+            string this_row = matrix.RowCopy(y);
             for (int x = 0; x < this_row.length(); x++) {
                 if (y < matrix.Starts()[x] ||
                     y > matrix.Starts()[x] + matrix.Lengths()[x]) {

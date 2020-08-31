@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
 using std::string;
 using std::vector;
@@ -21,7 +22,7 @@ class Matrix {
     Matrix(int width, int height); // Defined in matrix.cpp
 
     // Accessors
-    vector<string> Rows() const { return rows_; }
+    string RowCopy(int index) const { return rows_[index]; }
     int Width() const { return screen_width_; }
     int Height() const { return screen_height_; }
     vector<int> Lengths() const { return lengths_; }
