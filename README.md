@@ -7,6 +7,7 @@
 - CMAKE >= 3.16.3
 
 ### Folder Structure:
+```
 matrix/
     include/
         matrix.h
@@ -15,6 +16,8 @@ matrix/
         matrix.cpp
     CMakeLists.txt
     README.md
+    LICENSE
+```
 
 ### Program Structure:
 #### matrix.h
