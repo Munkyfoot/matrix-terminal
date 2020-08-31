@@ -7,6 +7,15 @@
 using std::string;
 using std::vector;
 
+struct Drop{
+    public:
+        int x{};
+        int y{};
+        char c{};
+
+        Drop(int _x, int _y, int _c) : x(_x), y(_y), c(_c) {} 
+};
+
 class Matrix {
   public:
     Matrix(int width, int height); // Defined in matrix.cpp

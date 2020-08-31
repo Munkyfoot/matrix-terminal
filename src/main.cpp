@@ -8,15 +8,6 @@
 
 using std::string;
 
-struct Drop{
-    public:
-        int x{};
-        int y{};
-        char c{};
-
-        Drop(int _x, int _y, int _c) : x(_x), y(_y), c(_c) {} 
-};
-
 int main() {
     initscr();
     noecho();
