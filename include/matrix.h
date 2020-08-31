@@ -1,21 +1,21 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-#include <string>
-#include <vector>
 #include <memory>
 #include <mutex>
+#include <string>
+#include <vector>
 
 using std::string;
 using std::vector;
 
-struct Drop{
-    public:
-        int x{};
-        int y{};
-        char c{};
+struct Drop {
+  public:
+    int x{};
+    int y{};
+    char c{};
 
-        Drop(int _x, int _y, int _c) : x(_x), y(_y), c(_c) {} 
+    Drop(int _x, int _y, int _c) : x(_x), y(_y), c(_c) {}
 };
 
 class Matrix {
@@ -31,17 +31,16 @@ class Matrix {
 
     // Methods
     void GenerateRow(string &row); // Defined in matrix.cpp
-    void AddNoise(float noise); // Defined in matrix.cpp
-    void Tick();                // Defined in matrix.cpp
+    void AddNoise(float noise);    // Defined in matrix.cpp
+    void Tick();                   // Defined in matrix.cpp
 
   protected:
-    string& RowReference(int index) { return *rows_[index]; }
+    string &RowReference(int index) { return *rows_[index]; }
 
   private:
     vector<std::unique_ptr<string>> rows_{};
     vector<int> lengths_{};
     vector<int> starts_{};
-    int current_row_id_{0};
     int screen_width_{};
     int screen_height_{};
     std::mutex mtx_;

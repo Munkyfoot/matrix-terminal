@@ -22,7 +22,7 @@ int main() {
         std::make_unique<Matrix>(getmaxx(stdscr) - 1, getmaxy(stdscr));
 
     while (1) {
-        auto noise_ftr = std::async([&matrix]{ matrix->AddNoise(0.1); });
+        auto noise_ftr = std::async([&matrix] { matrix->AddNoise(0.1); });
         matrix->Tick();
         init_pair(1, COLOR_GREEN, -1);
         attron(COLOR_PAIR(1));

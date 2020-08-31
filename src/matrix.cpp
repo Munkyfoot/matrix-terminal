@@ -23,14 +23,14 @@ Matrix::Matrix(int width, int height) {
     }
 }
 
-void Matrix::GenerateRow(string& row) {
+void Matrix::GenerateRow(string &row) {
     row = "";
     for (int i = 0; i < this->screen_width_; i++) {
         // ASCII
         row += (char)(rand() % 76 + 48);
 
         // binary
-        //row += std::to_string(rand() & 2 / 2);
+        // row += std::to_string(rand() & 2 / 2);
     }
 }
 
@@ -50,8 +50,8 @@ void Matrix::AddNoise(float noise) {
                 // ASCII
                 (char)(rand() % 76 + 48);
 
-                // binary
-                //output[0];
+            // binary
+            // output[0];
         }
     }
 }
