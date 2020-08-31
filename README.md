@@ -8,7 +8,7 @@
 
 ### Folder Structure:
 ```
-matrix/
+matrix-terminal/
     include/
         matrix.h
     src/
@@ -28,7 +28,7 @@ Defines the Matrix class.
 Initializes NCURSES and instantiates a Matrix object to manage the output to terminal.
 
 ### Build Instructions:
-1. Make sure you are in the 'matrix' parent directory.
+1. Make sure you are in the 'matrix-terminal' parent directory.
 2. Use 'mkdir build && cd build' to create and enter the build directory.
 3. Use 'cmake ..' to allow CMake to generate the necessary files to compile the project.
 4. Use 'make' to compile the project and create an executable.
