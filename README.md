@@ -15,8 +15,8 @@ matrix/
         main.cpp
         matrix.cpp
     CMakeLists.txt
-    README.md
     LICENSE
+    README.md
 ```
 
 ### Program Structure:
