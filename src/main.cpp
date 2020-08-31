@@ -5,6 +5,7 @@
 #include <string>
 #include <thread>
 #include <vector>
+#include <memory>
 
 using std::string;
 
@@ -16,25 +17,25 @@ int main() {
     use_default_colors();
     start_color();
 
-    Matrix matrix(getmaxx(stdscr) - 1, getmaxy(stdscr));
+    std::unique_ptr<Matrix> matrix = std::make_unique<Matrix>(getmaxx(stdscr) - 1, getmaxy(stdscr));
 
     while (1) {
-        matrix.AddNoise(0.1);
-        matrix.Tick();
+        matrix->AddNoise(0.1);
+        matrix->Tick();
         init_pair(1, COLOR_GREEN, -1);
         attron(COLOR_PAIR(1));
         vector<Drop> drops{};
-        for (int y = 0; y < matrix.Height(); y++) {
-            string this_row = matrix.RowCopy(y);
+        for (int y = 0; y < matrix->Height(); y++) {
+            string this_row = matrix->RowCopy(y);
             for (int x = 0; x < this_row.length(); x++) {
-                if (y < matrix.Starts()[x] ||
-                    y > matrix.Starts()[x] + matrix.Lengths()[x]) {
-                    if (y > matrix.Starts()[x] + matrix.Lengths()[x] -
-                                matrix.Height()) {
+                if (y < matrix->Starts()[x] ||
+                    y > matrix->Starts()[x] + matrix->Lengths()[x]) {
+                    if (y > matrix->Starts()[x] + matrix->Lengths()[x] -
+                                matrix->Height()) {
                         this_row[x] = ' ';
                     }
                 }
-                if(y == (matrix.Starts()[x] + matrix.Lengths()[x]) % matrix.Height()){
+                if(y == (matrix->Starts()[x] + matrix->Lengths()[x]) % matrix->Height()){
                     Drop drop{x, y, this_row[x]};
                     drops.push_back(drop);
                 }
