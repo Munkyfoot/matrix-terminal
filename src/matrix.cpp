@@ -14,8 +14,8 @@ Matrix::Matrix(int width, int height) {
 
     for (int i = 0; i < height; i++) {
         this->rows_.push_back(std::make_unique<string>(""));
-        GenerateRow(*this->rows_[i]);
     }
+    GenerateAllRows();
 
     for (int i = 0; i < width; i++) {
         this->lengths_.push_back(rand() % (height / 3) + height / 3);
@@ -23,14 +23,23 @@ Matrix::Matrix(int width, int height) {
     }
 }
 
+void Matrix::GenerateAllRows() {
+    for (int i = 0; i < this->rows_.size(); i++) {
+        GenerateRow(*this->rows_[i]);
+    }
+}
+
 void Matrix::GenerateRow(string &row) {
     row = "";
     for (int i = 0; i < this->screen_width_; i++) {
-        // ASCII
-        row += (char)(rand() % 76 + 48);
-
-        // binary
-        // row += std::to_string(rand() & 2 / 2);
+        switch (this->charset_) {
+        case CharSet::ASCII:
+            row += (char)(rand() % 76 + 48);
+            break;
+        case CharSet::Binary:
+            row += std::to_string(rand() & 2 / 2);
+            break;
+        }
     }
 }
 
@@ -46,12 +55,17 @@ void Matrix::AddNoise(float noise) {
         int changes = rand() % (int)(this->rows_[r]->length() * noise);
         for (int c = 0; c < changes; c++) {
             // std::string output = std::to_string(rand() & 2 / 2);
+            char replacement{'-'};
+            switch (this->charset_) {
+            case CharSet::ASCII:
+                replacement = (char)(rand() % 76 + 48);
+                break;
+            case CharSet::Binary:
+                replacement = std::to_string(rand() & 2 / 2)[0];
+                break;
+            }
             this->RowReference(r)[rand() % (int)(this->rows_[r]->length())] =
-                // ASCII
-                (char)(rand() % 76 + 48);
-
-            // binary
-            // output[0];
+                replacement;
         }
     }
 }
@@ -70,5 +84,18 @@ void Matrix::Tick() {
                 }
             }
         }
+    }
+}
+
+void Matrix::ChangeCharSet(CharSet set) {
+    charset_ = set;
+    GenerateAllRows();
+}
+
+void Matrix::ToggleCharSet() {
+    if (charset_ == CharSet::Binary) {
+        ChangeCharSet(CharSet::ASCII);
+    } else {
+        ChangeCharSet(CharSet::Binary);
     }
 }

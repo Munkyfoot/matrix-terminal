@@ -60,6 +60,8 @@ int main() {
         usr_input = (char)wgetch(stdscr);
         if (usr_input == 'q') {
             break;
+        } else if (usr_input == 'c') {
+            matrix->ToggleCharSet();
         }
 
         std::this_thread::sleep_for(std::chrono::milliseconds(84));

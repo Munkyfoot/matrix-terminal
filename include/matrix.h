@@ -9,6 +9,8 @@
 using std::string;
 using std::vector;
 
+enum CharSet { Binary, ASCII };
+
 struct Drop {
   public:
     int x{};
@@ -28,11 +30,15 @@ class Matrix {
     int Height() const { return screen_height_; }
     vector<int> Lengths() const { return lengths_; }
     vector<int> Starts() const { return starts_; }
+    CharSet CurrentCharSet() const { return charset_; }
 
     // Methods
-    void GenerateRow(string &row); // Defined in matrix.cpp
-    void AddNoise(float noise);    // Defined in matrix.cpp
-    void Tick();                   // Defined in matrix.cpp
+    void GenerateAllRows();          // Defined in matrix.cpp
+    void GenerateRow(string &row);   // Defined in matrix.cpp
+    void AddNoise(float noise);      // Defined in matrix.cpp
+    void Tick();                     // Defined in matrix.cpp
+    void ChangeCharSet(CharSet set); // Defined in matrix.cpp
+    void ToggleCharSet();
 
   protected:
     string &RowReference(int index) { return *rows_[index]; }
@@ -43,6 +49,7 @@ class Matrix {
     vector<int> starts_{};
     int screen_width_{};
     int screen_height_{};
+    CharSet charset_{CharSet::Binary};
     std::mutex mtx_;
 };
 
