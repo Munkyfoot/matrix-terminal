@@ -41,6 +41,7 @@ void Matrix::AddNoise(float noise) {
         noise = 1;
     }
 
+    std::lock_guard<std::mutex> lck(this->mtx_);
     for (int r = 0; r < this->screen_height_; r++) {
         int changes = rand() % (int)(this->rows_[r]->length() * noise);
         for (int c = 0; c < changes; c++) {

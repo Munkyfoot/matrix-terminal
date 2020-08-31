@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <mutex>
 
 using std::string;
 using std::vector;
@@ -43,6 +44,7 @@ class Matrix {
     int current_row_id_{0};
     int screen_width_{};
     int screen_height_{};
+    std::mutex mtx_;
 };
 
 #endif
