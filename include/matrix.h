@@ -49,7 +49,7 @@ class Matrix {
     vector<int> starts_{};
     int screen_width_{};
     int screen_height_{};
-    CharSet charset_{CharSet::Binary};
+    CharSet charset_{CharSet::ASCII};
     std::mutex mtx_;
 };
 
