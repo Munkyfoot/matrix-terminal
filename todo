@@ -1,5 +1,4 @@
-- Create options menu where you can choose color and characters (binary or ASCII)
-- Save/load options to from file
-- Implement multi-threading
+- Add user input to quit and switch character set.
+X Implement multi-threading
 X Implement memory management
 - Comment code

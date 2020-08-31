@@ -13,6 +13,8 @@ using std::string;
 int main() {
     initscr();
     noecho();
+    nodelay(stdscr, TRUE);
+    keypad(stdscr, TRUE);
     cbreak();
     curs_set(0);
     use_default_colors();
@@ -20,6 +22,8 @@ int main() {
 
     std::unique_ptr<Matrix> matrix =
         std::make_unique<Matrix>(getmaxx(stdscr) - 1, getmaxy(stdscr));
+
+    char usr_input;
 
     while (1) {
         auto noise_ftr = std::async([&matrix] { matrix->AddNoise(0.1); });
@@ -52,6 +56,12 @@ int main() {
         }
         noise_ftr.wait();
         refresh();
+
+        usr_input = (char)wgetch(stdscr);
+        if (usr_input == 'q') {
+            break;
+        }
+
         std::this_thread::sleep_for(std::chrono::milliseconds(84));
     }
     endwin();
