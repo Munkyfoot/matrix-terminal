@@ -11,6 +11,7 @@
 using std::string;
 
 int main() {
+    // Initialize NCURSES
     initscr();
     noecho();
     nodelay(stdscr, TRUE);
@@ -25,6 +26,7 @@ int main() {
 
     char usr_input;
 
+    // Infinite while loop allows for dynamic rendering of content
     while (1) {
         auto noise_ftr = std::async([&matrix] { matrix->AddNoise(0.1); });
         matrix->Tick();
@@ -57,6 +59,7 @@ int main() {
         noise_ftr.wait();
         refresh();
 
+        // Check for user input and respond accordingly
         usr_input = (char)wgetch(stdscr);
         if (usr_input == 'q') {
             break;
@@ -64,6 +67,7 @@ int main() {
             matrix->ToggleCharSet();
         }
 
+        // Sleep thread to delay next frame
         std::this_thread::sleep_for(std::chrono::milliseconds(84));
     }
     endwin();

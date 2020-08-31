@@ -9,8 +9,10 @@
 using std::string;
 using std::vector;
 
+// Used to choose which character set is displayed
 enum CharSet { Binary, ASCII };
 
+// Used to store the tip of a vertical character stream
 struct Drop {
   public:
     int x{};
